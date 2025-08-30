@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 function GroupTestEntry() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -6,17 +6,39 @@ function GroupTestEntry() {
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
+  const [error, setError] = useState('');
+  const debounceRef = useRef(null);
+
+  useEffect(() => {
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    debounceRef.current = setTimeout(() => {
+      if (searchTerm.trim()) {
+        searchUsers(searchTerm.trim());
+      } else {
+        setSearchResults([]);
+      }
+    }, 300);
+
+    return () => {
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+    };
+  }, [searchTerm]);
 
   // 닉네임으로 사용자 검색
-  const searchUsers = async (nickname) => {
-    if (!nickname.trim()) {
+  const searchUsers = async (keyword) => {
+    if (!keyword.trim()) {
       setSearchResults([]);
       return;
     }
 
     try {
       setLoading(true);
-      const response = await fetch(`/api/users/search?nickname=${encodeURIComponent(nickname)}`);
+      const response = await fetch(`/api/users/search?keyword=${encodeURIComponent(keyword)}`);
       const data = await response.json();
       
       if (data.success) {
@@ -36,13 +58,6 @@ function GroupTestEntry() {
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
-    
-    // 디바운싱을 위한 타이머
-    setTimeout(() => {
-      if (searchTerm === value) {
-        searchUsers(value);
-      }
-    }, 300);
   };
 
   // 팀원 추가
@@ -57,14 +72,15 @@ function GroupTestEntry() {
       return;
     }
 
-    setSelectedMembers([...selectedMembers, user]);
+    setSelectedMembers(prev => [...prev, user]);
     setSearchTerm('');
     setSearchResults([]);
+    setError('');
   };
 
   // 팀원 제거
   const removeMember = (userId) => {
-    setSelectedMembers(selectedMembers.filter(member => member.id !== userId));
+    setSelectedMembers(prev => prev.filter(member => member.id !== userId));
   };
 
   // 그룹 분석 시작
@@ -139,7 +155,7 @@ function GroupTestEntry() {
           marginBottom: 20,
         }}>
           <div
-            onClick={() => window.location.href = '/'}
+            onClick={() => alert('홈으로 이동')}
             style={{
               fontSize: 20,
               fontWeight: 700,
@@ -187,14 +203,37 @@ function GroupTestEntry() {
           />
         </div>
 
-        {/* 검색 결과 */}
+        {/* 로딩 상태 */}
         {loading && (
-          <div style={{ textAlign: 'center', color: '#6b7280', margin: '10px 0' }}>
+          <div style={{ 
+            textAlign: 'center', 
+            color: '#6b7280', 
+            margin: '10px 0',
+            padding: '12px',
+            backgroundColor: '#f9fafb',
+            borderRadius: 8,
+          }}>
             검색 중...
           </div>
         )}
+
+        {/* 에러 메시지 */}
+        {error && !loading && (
+          <div style={{ 
+            textAlign: 'center', 
+            color: '#ef4444', 
+            margin: '10px 0',
+            padding: '12px',
+            backgroundColor: '#fef2f2',
+            borderRadius: 8,
+            border: '1px solid #fecaca'
+          }}>
+            {error}
+          </div>
+        )}
         
-        {searchResults.length > 0 && (
+        {/* 검색 결과 */}
+        {searchResults.length > 0 && !loading && (
           <div style={{
             maxHeight: 150,
             overflowY: 'auto',
@@ -214,9 +253,10 @@ function GroupTestEntry() {
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   backgroundColor: '#ffffff',
+                  transition: 'background-color 0.2s'
                 }}
-                onMouseEnter={(e) => e.target.style.backgroundColor = '#f9fafb'}
-                onMouseLeave={(e) => e.target.style.backgroundColor = '#ffffff'}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f9fafb'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#ffffff'}
               >
                 <div>
                   <div style={{ fontWeight: 600, color: '#1f2937' }}>
@@ -326,7 +366,8 @@ function GroupTestEntry() {
               fontWeight: 800,
               fontSize: 16,
               cursor: selectedMembers.length >= 2 && !analyzing ? 'pointer' : 'not-allowed',
-              opacity: analyzing ? 0.7 : 1
+              opacity: analyzing ? 0.7 : 1,
+              transition: 'all 0.2s'
             }}
           >
             {analyzing ? (
