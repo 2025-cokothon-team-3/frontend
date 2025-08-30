@@ -178,19 +178,22 @@ function PersonalAnalysis() {
             }}>Share</button>
           </div>
 
-          <button style={{
-            marginTop: 20,
-            width: '100%',
-            padding: '14px',
-            borderRadius: 12,
-            fontWeight: 800,
-            fontSize: 14,
-            background: 'linear-gradient(135deg,#a78bfa,#818cf8)',
-            color: 'white',
-            border: 'none',
-            cursor: 'pointer',
-            boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
-          }}>
+          <button
+            onClick={() => navigate('/group-test')}
+            style={{
+              marginTop: 20,
+              width: '100%',
+              padding: '14px',
+              borderRadius: 12,
+              fontWeight: 800,
+              fontSize: 14,
+              background: 'linear-gradient(135deg,#a78bfa,#818cf8)',
+              color: 'white',
+              border: 'none',
+              cursor: 'pointer',
+              boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+            }}
+          >
             우리의 여행 밸런스 알아보기 -&gt;
           </button>
         </div>
