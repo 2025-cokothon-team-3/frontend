@@ -94,6 +94,16 @@ function Question1() {
         >
           ←
         </div>
+        <img
+          src={banner}
+          alt="Top Banner"
+          style={{
+            width: '100%',
+            height: 'auto',
+            marginBottom: 24,
+            borderRadius: 12
+          }}
+        />
 
         <div style={{ fontWeight: 900, fontSize: 28, marginBottom: 12 }}>Q1.</div>
 
