@@ -16,7 +16,6 @@ import Question13 from './pages/Question13';
 import Question14 from './pages/Question14';
 import Question15 from './pages/Question15';
 import Question16 from './pages/Question16';
-
 import Result from './pages/Result';
 
 function App() {

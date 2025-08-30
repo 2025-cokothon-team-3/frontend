@@ -170,7 +170,7 @@ function Home() {
                                 marginBottom: 5,
                             }}
                         >
-                            우리의 여행 성향 케미?TEST
+                            여행 성향 케미 테스트
                         </h1>
 
                         <p
@@ -184,10 +184,10 @@ function Home() {
                                 padding: '6px 13px',
                                 borderRadius: 999,
                                 fontWeight: 700,
-                                fontSize: 12,
+                                fontSize: 14,
                             }}
                         >
-                            친구야.. 우리는 여행 어떻게 해야될까 ...?
+                            함께 할 사람들과 찾는 완벽한 여행 균형점
                         </p>
 
                         {/* 닉네임 입력 */}
