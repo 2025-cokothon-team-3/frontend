@@ -1,6 +1,3 @@
-
-
-
 // components/MyLottie.jsx
 import React from "react";
 import Lottie from "lottie-react";
