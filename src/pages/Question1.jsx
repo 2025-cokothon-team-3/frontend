@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import banner from '../assets/images/사진1.png'; // 사용 안 하면 제거
 
 function Question1() {
     const navigate = useNavigate();
     const [selected, setSelected] = useState(null);
 
-    // API 상태
+    // 🔹 API로 받아올 데이터 상태
     const [questionText, setQuestionText] = useState('');
     const [choices, setChoices] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // 🔹 API 호출
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -20,16 +20,24 @@ function Question1() {
                     `http://52.68.59.48:8081/api/questions/${questionId}`
                 );
                 const data = await res.json();
-                const q = data.data;
-                setQuestionText(q.content);
-                setChoices([q.choice1, q.choice2, q.choice3]);
+
+                const question = data.data;
+
+                setQuestionText(question.content);
+                setChoices([
+                    question.choice1,
+                    question.choice2,
+                    question.choice3,
+                ]);
+
                 setLoading(false);
-            } catch (e) {
-                console.error(e);
+            } catch (err) {
+                console.error('Error fetching question:', err);
                 setError('질문을 불러오지 못했어요.');
                 setLoading(false);
             }
         };
+
         fetchData();
     }, []);
 
