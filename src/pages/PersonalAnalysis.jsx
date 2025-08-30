@@ -33,6 +33,28 @@ function PersonalAnalysis() {
           dominantType
         } = data.data;
 
+        // 카테고리별 타입 매핑 (양극성 구조)
+        const getTypeLabels = (type) => {
+          const typeMap = {
+            // 여행 계획
+            '계획형': { left: '즉흥형', right: '계획형' },
+            '즉흥형': { left: '즉흥형', right: '계획형' },
+            
+            // 여행 예산  
+            '절약형': { left: '절약형', right: '럭셔리형' },
+            '럭셔리형': { left: '절약형', right: '럭셔리형' },
+            
+            // 여행 활동
+            '휴식형': { left: '휴식형', right: '액티브형' },
+            '액티브형': { left: '휴식형', right: '액티브형' },
+            
+            // 사교 성향
+            '개인형': { left: '개인형', right: '사교형' },
+            '사교형': { left: '개인형', right: '사교형' }
+          };
+          return typeMap[type] || { left: type, right: type };
+        };
+
         setResult({
           title: dominantType,
           description: '계획을 체계적으로 세우는 것을 선호하며, 합리적인 예산으로 활동적인 여행을 즐기는 사교적인 성향을 보이고 있습니다.',
@@ -40,22 +62,38 @@ function PersonalAnalysis() {
             {
               name: '여행 계획',
               score: ((planningScore - 4) / 8) * 100,
-              label: planningType
+              label: planningType,
+              totalScore: planningScore,
+              maxScore: 12,
+              labels: getTypeLabels(planningType),
+              emoji: '📋'
             },
             {
               name: '여행 예산',
               score: ((budgetScore - 4) / 8) * 100,
-              label: budgetType
+              label: budgetType,
+              totalScore: budgetScore,
+              maxScore: 12,
+              labels: getTypeLabels(budgetType),
+              emoji: '💰'
             },
             {
               name: '여행 활동',
               score: ((activityScore - 4) / 8) * 100,
-              label: activityType
+              label: activityType,
+              totalScore: activityScore,
+              maxScore: 12,
+              labels: getTypeLabels(activityType),
+              emoji: '🏃'
             },
             {
               name: '사교 성향',
               score: ((socialScore - 4) / 8) * 100,
-              label: socialType
+              label: socialType,
+              totalScore: socialScore,
+              maxScore: 12,
+              labels: getTypeLabels(socialType),
+              emoji: '👥'
             }
           ]
         });
@@ -125,29 +163,71 @@ function PersonalAnalysis() {
         </div>
 
         {/* 카테고리별 점수 */}
-        {result?.categories?.map((cat) => (
-          <div key={cat.name} style={{ marginBottom: 20 }}>
+        {result?.categories?.map((cat, index) => (
+          <div key={cat.name} style={{ marginBottom: 24 }}>
             <div style={{
               display: 'flex',
               justifyContent: 'space-between',
+              alignItems: 'center',
               fontWeight: 600,
               fontSize: 14,
-              marginBottom: 6
+              marginBottom: 8
             }}>
-              <span>{cat.name}</span>
-              <span style={{ color: '#0284c7' }}>{cat.label} {cat.score}%</span>
+              <span style={{ color: '#1f2937' }}>{cat.name}</span>
+              <span style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '4px',
+                color: '#0284c7',
+                fontSize: '13px'
+              }}>
+                <span>{cat.emoji}</span>
+                <span>{cat.label}</span>
+                <span>{Math.round(cat.score)}%</span>
+              </span>
             </div>
+            
+            {/* 프로그레스바 */}
             <div style={{
-              backgroundColor: '#e2e8f0',
-              height: 12,
-              borderRadius: 8,
-              overflow: 'hidden'
+              backgroundColor: '#e5e7eb',
+              height: 10,
+              borderRadius: 20,
+              overflow: 'hidden',
+              marginBottom: 8
             }}>
               <div style={{
                 width: `${cat.score}%`,
-                backgroundColor: '#60a5fa',
-                height: '100%'
+                backgroundColor: index === 0 ? '#10b981' : 
+                              index === 1 ? '#0ea5e9' : 
+                              index === 2 ? '#84cc16' : 
+                              '#f59e0b',
+                height: '100%',
+                borderRadius: 20,
+                transition: 'width 0.5s ease-in-out'
               }} />
+            </div>
+            
+            {/* 프로그레스바 아래 레이블과 점수 */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              fontSize: 12,
+              color: '#6b7280'
+            }}>
+              <span style={{ fontWeight: 500 }}>{cat.labels.left}</span>
+              <span style={{ fontWeight: 500 }}>{cat.labels.right}</span>
+            </div>
+            
+            {/* 중앙 점수 표시 */}
+            <div style={{
+              textAlign: 'center',
+              marginTop: 6,
+              fontSize: 13,
+              color: '#6b7280',
+              fontWeight: 600
+            }}>
+              {cat.totalScore}/{cat.maxScore}점
             </div>
           </div>
         ))}
@@ -201,16 +281,5 @@ function PersonalAnalysis() {
     </div>
   );
 }
-
-const buttonStyle = {
-  marginRight: '12px',
-  padding: '10px 20px',
-  fontSize: '16px',
-  borderRadius: '8px',
-  border: 'none',
-  cursor: 'pointer',
-  backgroundColor: '#3b82f6',
-  color: 'white'
-};
 
 export default PersonalAnalysis;
