@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 function GroupTestEntry() {
-  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]);
