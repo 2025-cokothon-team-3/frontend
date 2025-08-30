@@ -16,7 +16,7 @@ function GroupInput() {
         .map((id) => parseInt(id.trim()))
         .filter((id) => !isNaN(id));
 
-      const res = await fetch('http://52.68.59.48:8081/api/groups', {
+      const res = await fetch('/api/groups', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userIds: userIdArray }),

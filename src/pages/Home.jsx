@@ -26,7 +26,7 @@ function Home() {
 
         try {
             const response = await axios.post(
-                'http://52.68.59.48:8081/api/users/login',
+                '/api/users/login',
                 {
                     nickname: nickname.trim(),
                 }
