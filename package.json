@@ -13,7 +13,7 @@
   "license": "MIT",
   "author": "Team 011",
   "type": "module",
-  "main": "webpack.config.js",
+  "main": "webpack.config.mjs",
   "scripts": {
     "dev": "webpack serve --mode development",
     "build": "webpack --mode production",
