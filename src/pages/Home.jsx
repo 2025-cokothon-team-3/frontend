@@ -100,9 +100,15 @@ function Home() {
                 >
                     <div
                         style={{
-                            fontWeight: 800,
+                            fontWeight: 100,
                             fontSize: 16,
                             color: '#0f172a',
+                            display: 'flex',
+                            justifyContent: 'center', // 내부 컨텐츠 중앙
+                            width: '100%', // 한 줄 전체 차지
+                            position: 'absolute',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
                         }}
                     >
                         Travel Balance
