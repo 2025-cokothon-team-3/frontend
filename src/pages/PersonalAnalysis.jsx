@@ -18,10 +18,47 @@ function PersonalAnalysis() {
         }
 
         // 결과 타입 받아오기
-        const res = await fetch(`/api/test-results/personality/${userId}`);
+        const res = await fetch(`/api/test-results/user/${userId}`);
         if (!res.ok) throw new Error('결과를 불러올 수 없습니다');
         const data = await res.json();
-        setResult(data);
+        const {
+          planningType,
+          budgetType,
+          activityType,
+          socialType,
+          planningScore,
+          budgetScore,
+          activityScore,
+          socialScore,
+          dominantType
+        } = data.data;
+
+        setResult({
+          title: dominantType,
+          description: '계획을 체계적으로 세우는 것을 선호하며, 합리적인 예산으로 활동적인 여행을 즐기는 사교적인 성향을 보이고 있습니다.',
+          categories: [
+            {
+              name: '여행 계획',
+              score: ((planningScore - 4) / 8) * 100,
+              label: planningType
+            },
+            {
+              name: '여행 예산',
+              score: ((budgetScore - 4) / 8) * 100,
+              label: budgetType
+            },
+            {
+              name: '여행 활동',
+              score: ((activityScore - 4) / 8) * 100,
+              label: activityType
+            },
+            {
+              name: '사교 성향',
+              score: ((socialScore - 4) / 8) * 100,
+              label: socialType
+            }
+          ]
+        });
       } catch (err) {
         console.error(err);
         alert('결과 조회 중 오류가 발생했습니다.');
