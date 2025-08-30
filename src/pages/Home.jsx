@@ -170,7 +170,7 @@ function Home() {
                                 marginBottom: 5,
                             }}
                         >
-                            여행 성향 케미 테스트
+                            우리의 여행 성향 케미?TEST
                         </h1>
 
                         <p
