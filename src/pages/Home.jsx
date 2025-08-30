@@ -3,206 +3,256 @@ import { useNavigate } from 'react-router-dom';
 import globeImg from '../assets/images/여행_마크.png';
 
 function Home() {
-  // 닉네임과 공유링크 상태
-  const [nickname, setNickname] = useState('');
-  const [shareCopied, setShareCopied] = useState(false);
-  const navigate = useNavigate();
+    // 상태
+    const [nickname, setNickname] = useState('');
+    const [shareCopied, setShareCopied] = useState(false);
+    const navigate = useNavigate();
 
-  // 현재 페이지 URL (렌더 때마다 새로 만들 필요 없으므로 useMemo)
-  const shareLink = useMemo(() => (typeof window !== 'undefined' ? window.location.href : ''), []);
+    // 현재 페이지 URL
+    const shareLink = useMemo(
+        () => (typeof window !== 'undefined' ? window.location.href : ''),
+        []
+    );
 
-  // 닉네임 기억하기 (로컬 저장/불러오기)
-  useEffect(() => {
-    const saved = localStorage.getItem('nickname');
-    if (saved) setNickname(saved);
-  }, []);
-  useEffect(() => {
-    if (nickname.trim()) {
-      localStorage.setItem('nickname', nickname.trim());
-    }
-  }, [nickname]);
+    // 저장된 닉네임 로드
+    useEffect(() => {
+        const saved = localStorage.getItem('nickname');
+        if (saved) setNickname(saved);
+    }, []);
 
-  const handleSubmit = () => {
-    if (nickname.trim() === '') {
-      alert('닉네임을 입력해주세요!');
-      return;
-    }
-    localStorage.setItem('nickname', nickname.trim());
-    navigate('/question1');
-  };
+    // 닉네임 변화 시 저장
+    useEffect(() => {
+        if (nickname.trim()) {
+            localStorage.setItem('nickname', nickname.trim());
+        }
+    }, [nickname]);
 
-  const handleShareClick = async () => {
-    try {
-      if (navigator.clipboard && shareLink) {
-        await navigator.clipboard.writeText(shareLink);
-        setShareCopied(true);
-        setTimeout(() => setShareCopied(false), 1500);
-      }
-    } catch (e) {
-      // fallback
-      const temp = document.createElement('input');
-      temp.value = shareLink;
-      document.body.appendChild(temp);
-      temp.select();
-      document.execCommand('copy');
-      document.body.removeChild(temp);
-      setShareCopied(true);
-      setTimeout(() => setShareCopied(false), 1500);
-    }
-  };
+    // 제출
+    const handleSubmit = () => {
+        if (nickname.trim() === '') {
+            alert('닉네임을 입력해주세요!');
+            return;
+        }
+        localStorage.setItem('nickname', nickname.trim());
+        navigate('/question1');
+    };
 
-  return (
-    <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: 'linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%)',
-        fontFamily: 'ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji'
-      }}
-    >
-      <div
-        style={{
-          width: '100%',
-          maxWidth: 760, // 앱웹 사이즈
-          margin: '24px',
-          borderRadius: 24,
-          padding: 24,
-          background: '#ffffff',
-          boxShadow: '0 10px 30px rgba(15, 23, 42, 0.08)',
-          overflow: 'hidden'
-        }}
-      >
-        {/* 상단 헤더 */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
-          <div style={{ fontWeight: 800, fontSize: 18, color: '#0f172a', marginLeft: 110 }}>4TH COKOTHON 011조</div>
-          <div
-            style={{
-              marginLeft: 'auto',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8
-            }}
-          >
-            <button
-              onClick={handleShareClick}
-              style={{
-                borderRadius: 20,
-                padding: '8px 14px',
-                fontWeight: 700,
-                border: '1px solid #e2e8f0',
-                background: shareCopied ? '#22c55e' : '#ffffff',
-                color: shareCopied ? '#ffffff' : '#0f172a',
-                cursor: 'pointer'
-              }}
-              aria-label="Share link"
-              title="현재 페이지 링크 복사"
-            >
-              {shareCopied ? 'Copied!' : 'Share link'}
-            </button>
-          </div>
-        </div>
+    // 공유 링크 복사
+    const handleShareClick = async () => {
+        try {
+            if (navigator.clipboard && shareLink) {
+                await navigator.clipboard.writeText(shareLink);
+                setShareCopied(true);
+                setTimeout(() => setShareCopied(false), 1500);
+            }
+        } catch {
+            const temp = document.createElement('input');
+            temp.value = shareLink;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            setShareCopied(true);
+            setTimeout(() => setShareCopied(false), 1500);
+        }
+    };
 
-        {/* 메인 영역 */}
+    return (
         <div
-          style={{
-            display: 'flex',
-            gap: 24,
-            alignItems: 'center',
-            flexWrap: 'wrap'
-          }}
-        >
-          {/* 좌측 이미지 */}
-          <div
+            // 화면 전체 배경 + 중앙 정렬
             style={{
-              flex: '1 1 0',
-              minWidth: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: 'linear-gradient(135deg, #d4e3eeff 0%, #afb7c2ff 100%)',
-              borderRadius: 20,
-              padding: 24
+                minHeight: '100vh',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                background: 'linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%)',
+                fontFamily:
+                    '"SBAggroL", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji',
             }}
-          >
-            <img
-              src={globeImg}
-              alt="여행 아이콘"
-              style={{ width: '100%', maxWidth: 280, height: 'auto', filter: 'drop-shadow(0 8px 16px rgba(2,132,199,.25))' }}
-            />
-          </div>
-
-          {/* 우측 컨텐츠 */}
-          <div style={{ flex: '1 1 0', minWidth: 0 }}>
-            <h1 style={{ fontSize: 28, fontWeight: 900, margin: 0, color: '#0f172a' }}>여행 성향 궁합 테스트</h1>
-            <p
-              style={{
-                marginTop: 10,
-                display: 'inline-block',
-                background: '#ecf9ff',
-                color: '#0284c7',
-                padding: '6px 12px',
-                borderRadius: 999,
-                fontWeight: 700,
-                fontSize: 13
-              }}
-            >
-              친구야, 우리.. 같이 여행 가도 괜찮을까..?
-            </p>
-
-            <div style={{ marginTop: 18 }}>
-              <input
-                type="text"
-                value={nickname}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  if (value.length <= 15) setNickname(value);
-                }}
-                maxLength={15}
-                placeholder="Enter nickname"
+        >
+            <div
+                // 휴대폰 프레임 컨테이너
                 style={{
-                  width: '100%',
-                  maxWidth: '100%',
-                  boxSizing: 'border-box',
-                  padding: '12px 16px',
-                  borderRadius: 16,
-                  border: '1px solid #e2e8f0',
-                  outline: 'none',
-                  fontSize: 14
+                    position: 'relative', // 하단 Share 버튼 absolute 배치용
+                    width: 390,
+                    maxWidth: '92vw',
+                    minHeight: 740,
+                    margin: '24px',
+                    borderRadius: 28,
+                    padding: 20,
+                    background: '#ffffff',
+                    boxShadow: '0 18px 40px rgba(15,23,42,0.12)',
+                    overflow: 'hidden',
+                    border: '1px solid #e5e7eb',
+                    display: 'flex',
+                    flexDirection: 'column',
                 }}
-              />
-            </div>
-
-            <div style={{ marginTop: 14, color: '#64748b', fontSize: 12 }}>
-              저장된 닉네임: <strong>{nickname || '없음'}</strong>
-            </div>
-
-            <button
-              onClick={handleSubmit}
-              style={{
-                marginTop: 18,
-                padding: '12px 18px',
-                borderRadius: 16,
-                background: '#111827',
-                color: 'white',
-                border: 'none',
-                fontWeight: 800,
-                cursor: 'pointer'
-              }}
             >
-              나만의 테스트 만들기
-            </button>
-          </div>
-        </div>
+                {/* 헤더 (Share 버튼은 제거) */}
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        gap: 8,
+                        marginBottom: 12,
+                    }}
+                >
+                    <div
+                        style={{
+                            fontWeight: 800,
+                            fontSize: 16,
+                            color: '#0f172a',
+                        }}
+                    >
+                        Travel Balance
+                    </div>
+                </div>
 
-        {/* 하단 도움 텍스트 */}
-        <div style={{ marginTop: 18, fontSize: 12, color: '#94a3b8' }}>
-          공유 링크: <span style={{ userSelect: 'all' }}>{shareLink}</span>
+                {/* 메인 콘텐츠 */}
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 16,
+                    }}
+                >
+                    {/* 이미지 카드 */}
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            background:
+                                'linear-gradient(135deg, #d4e3eeff 0%, #afb7c2ff 100%)',
+                            borderRadius: 18,
+                            padding: 16,
+                        }}
+                    >
+                        <img
+                            src={globeImg}
+                            alt="여행 아이콘"
+                            style={{
+                                width: '70%',
+                                maxWidth: 220,
+                                height: 'auto',
+                                filter: 'drop-shadow(0 8px 16px rgba(2,132,199,.25))',
+                            }}
+                        />
+                    </div>
+
+                    {/* 텍스트/입력 영역 */}
+                    <div>
+                        <h1
+                            style={{
+                                fontSize: 28,
+                                fontWeight: 900,
+                                margin: 10,
+                                color: '#0f172a',
+                                lineHeight: 1.25,
+                            }}
+                        >
+                            여행 성향 케미 테스트
+                        </h1>
+
+                        <p
+                            style={{
+                                marginTop: 5,
+                                marginBottom: 50,
+                                display: 'inline-block',
+                                background: '#ecf9ff',
+                                color: '#0284c7',
+                                padding: '6px 10px',
+                                borderRadius: 999,
+                                fontWeight: 700,
+                                fontSize: 12,
+                            }}
+                        >
+                            친구야.. 우리는 여행 어떻게 해야될까 ...?
+                        </p>
+
+                        {/* 닉네임 입력 */}
+                        <div style={{ marginTop: 14 }}>
+                            <input
+                                type="text"
+                                value={nickname}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    if (value.length <= 15) setNickname(value);
+                                }}
+                                maxLength={15}
+                                placeholder="닉네임을 입력하세요"
+                                style={{
+                                    width: '100%',
+                                    boxSizing: 'border-box',
+                                    padding: '18px 14px',
+                                    borderRadius: 14,
+                                    border: '1px solid #e2e8f0',
+                                    outline: 'none',
+                                    fontSize: 18,
+                                }}
+                                aria-label="닉네임 입력"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* ===== 하단 영역: 버튼들을 아래로 내리기 위해 marginTop:'auto' 사용 ===== */}
+                <div
+                    style={{
+                        marginTop: 'auto',
+                        paddingTop: 8,
+                        paddingRight: 8, // 오른쪽 Share 버튼과 간격
+                        paddingBottom: 72, // Share 버튼(아래 구석)과 겹치지 않도록 여유 공간
+                    }}
+                >
+                    <button
+                        onClick={handleSubmit}
+                        style={{
+                            width: '100%',
+                            padding: '12px 14px',
+                            borderRadius: 14,
+                            background: '#111827',
+                            color: 'white',
+                            border: 'none',
+                            fontWeight: 800,
+                            cursor: 'pointer',
+                            fontSize: 15,
+                            // 테스트 버튼을 화면 더 아래쪽에 보이도록 하단 여백은 최소화,
+                            // 대신 아래쪽 Share 버튼이 더 낮게 배치됨 (absolute)
+                            marginBottom: 8,
+                        }}
+                        aria-label="테스트 하러 가기"
+                    >
+                        테스트 하러 가기
+                    </button>
+                </div>
+
+                {/* ===== 오른쪽 아래 구석: Share 버튼 (테스트 버튼보다 더 아래) ===== */}
+                <button
+                    onClick={handleShareClick}
+                    style={{
+                        position: 'absolute',
+                        right: 12,
+                        bottom: 12, // 가장 아래 구석
+                        borderRadius: 999,
+                        padding: '10px 14px',
+                        fontWeight: 700,
+                        border: '1px solid #e2e8f0',
+                        background: shareCopied ? '#22c55e' : '#ffffff',
+                        color: shareCopied ? '#ffffff' : '#0f172a',
+                        cursor: 'pointer',
+                        fontSize: 12,
+                        boxShadow: '0 6px 16px rgba(2, 6, 23, 0.12)',
+                    }}
+                    aria-label="현재 페이지 링크 복사"
+                    title="현재 페이지 링크 복사"
+                >
+                    {shareCopied ? 'Copied!' : 'Share'}
+                </button>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Home;
