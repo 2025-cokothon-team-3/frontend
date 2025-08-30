@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import globeImg from '../assets/images/여행_마크.png';
 
 function Home() {
   // 닉네임과 공유링크 상태
   const [nickname, setNickname] = useState('');
   const [shareCopied, setShareCopied] = useState(false);
+  const navigate = useNavigate();
 
   // 현재 페이지 URL (렌더 때마다 새로 만들 필요 없으므로 useMemo)
   const shareLink = useMemo(() => (typeof window !== 'undefined' ? window.location.href : ''), []);
@@ -25,8 +27,8 @@ function Home() {
       alert('닉네임을 입력해주세요!');
       return;
     }
-    // 추후 라우팅으로 연결될 자리 (예: navigate(`/result?nick=${encodeURIComponent(nickname)}`))
-    console.log('닉네임:', nickname);
+    localStorage.setItem('nickname', nickname.trim());
+    navigate('/question1');
   };
 
   const handleShareClick = async () => {
