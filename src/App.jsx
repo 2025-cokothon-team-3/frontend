@@ -30,6 +30,7 @@ function App() {
         <Route path="/question15" element={<Navigate to="/question/15" replace />} />
         <Route path="/question16" element={<Navigate to="/question/16" replace />} />
         
+        <Route path="/personal-analysis" element={<PersonalAnalysis />} />
         <Route path="/result" element={<Result />} />
       </Routes>
     </BrowserRouter>

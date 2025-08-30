@@ -96,7 +96,7 @@ function Question() {
                         console.error('테스트 결과 계산 중 오류:', error);
                     }
                     
-                    navigate('/result');
+                    navigate('/personal-analysis');
                 } else {
                     navigate(`/question/${currentQuestionNum + 1}`);
                 }
