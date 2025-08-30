@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default {
-  entry: './client.jsx', // 또는 ./src/main.jsx 구조로 바꿔도 OK
+  entry: './src/index.jsx', 
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.[contenthash].js',
