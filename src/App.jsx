@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Question from './pages/Question'; // 새로 추가할 동적 컴포넌트
 import Result from './pages/Result';
+import PersonalAnalysis from './pages/PersonalAnalysis';
 
 function App() {
   return (
