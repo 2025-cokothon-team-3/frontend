@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Question1() {
+function Question2() {
     const navigate = useNavigate();
     const [selected, setSelected] = useState(null);
 
@@ -15,7 +15,7 @@ function Question1() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const questionId = 1;
+                const questionId = 2;
                 const res = await fetch(
                     `/api/questions/${questionId}`
                 );
@@ -46,7 +46,7 @@ function Question1() {
             alert('선택지를 골라주세요!');
             return;
         }
-        navigate('/question2');
+        navigate('/question3');
     };
 
     return (
@@ -218,4 +218,4 @@ function Question1() {
     );
 }
 
-export default Question1;
+export default Question2;
