@@ -100,15 +100,12 @@ function Home() {
                 >
                     <div
                         style={{
-                            fontWeight: 100,
-                            fontSize: 16,
+                            fontWeight: 800,
+                            fontSize: 18,
                             color: '#0f172a',
-                            display: 'flex',
-                            justifyContent: 'center', // 내부 컨텐츠 중앙
-                            width: '100%', // 한 줄 전체 차지
-                            position: 'absolute',
-                            left: '50%',
-                            transform: 'translateX(-50%)',
+                            textAlign: 'center',
+                            width: '100%',
+                            paddingTop: 4,
                         }}
                     >
                         Travel Balance
@@ -133,6 +130,7 @@ function Home() {
                                 'linear-gradient(135deg, #d4e3eeff 0%, #afb7c2ff 100%)',
                             borderRadius: 18,
                             padding: 16,
+                            marginTop: 10,
                         }}
                     >
                         <img
@@ -153,9 +151,10 @@ function Home() {
                             style={{
                                 fontSize: 28,
                                 fontWeight: 900,
-                                margin: 10,
+                                marginTop: 5,
                                 color: '#0f172a',
                                 lineHeight: 1.25,
+                                marginBottom: 5,
                             }}
                         >
                             여행 성향 케미 테스트
@@ -163,12 +162,13 @@ function Home() {
 
                         <p
                             style={{
-                                marginTop: 5,
+                                marginTop: 0,
                                 marginBottom: 50,
                                 display: 'inline-block',
                                 background: '#ecf9ff',
                                 color: '#0284c7',
-                                padding: '6px 10px',
+                                // color: 'gray',
+                                padding: '6px 13px',
                                 borderRadius: 999,
                                 fontWeight: 700,
                                 fontSize: 12,
@@ -187,7 +187,7 @@ function Home() {
                                     if (value.length <= 15) setNickname(value);
                                 }}
                                 maxLength={15}
-                                placeholder="닉네임을 입력하세요"
+                                placeholder="닉네임 입력하기"
                                 style={{
                                     width: '100%',
                                     boxSizing: 'border-box',
@@ -218,8 +218,8 @@ function Home() {
                             width: '100%',
                             padding: '12px 14px',
                             borderRadius: 14,
-                            background: '#111827',
-                            color: 'white',
+                            background: '#3db2edff',
+                            color: '#ffffff',
                             border: 'none',
                             fontWeight: 800,
                             cursor: 'pointer',
@@ -227,10 +227,12 @@ function Home() {
                             // 테스트 버튼을 화면 더 아래쪽에 보이도록 하단 여백은 최소화,
                             // 대신 아래쪽 Share 버튼이 더 낮게 배치됨 (absolute)
                             marginBottom: 8,
+                            background:
+                                'linear-gradient(135deg,#3db2edff, #a78bfa)',
                         }}
                         aria-label="테스트 하러 가기"
                     >
-                        테스트 하러 가기
+                        START
                     </button>
                 </div>
 
