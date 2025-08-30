@@ -53,10 +53,12 @@ function PersonalAnalysis() {
         <h3>✈️ 당신의 여행 스타일</h3>
         <p>{result.description}</p>
 
-        {Array.isArray(result.categories) ? (
+        {result?.categories && Array.isArray(result.categories) ? (
           result.categories.map((cat) => (
             <div key={cat.name} style={{ marginTop: '20px' }}>
-              <p style={{ marginBottom: '4px' }}>{cat.name} <b>{cat.label}</b> {cat.score}%</p>
+              <p style={{ marginBottom: '4px' }}>
+                {cat.name} <b>{cat.label}</b> {cat.score}%
+              </p>
               <div style={{ background: '#eee', height: '12px', borderRadius: '8px' }}>
                 <div
                   style={{
