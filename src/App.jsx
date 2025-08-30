@@ -3,6 +3,8 @@ import Home from './pages/Home';
 import Question from './pages/Question'; // 새로 추가할 동적 컴포넌트
 import Result from './pages/Result';
 import PersonalAnalysis from './pages/PersonalAnalysis';
+import GroupTestEntry from './pages/GroupTestEntry'; 
+import GroupAnalysisResult from './pages/GroupAnalysisResult'; 
 
 function App() {
   return (
@@ -12,6 +14,10 @@ function App() {
         
         {/* 동적 질문 라우트 */}
         <Route path="/question/:questionNumber" element={<Question />} />
+
+        {/* 그룹 테스트 관련 라우트 */}
+        <Route path="/group-test" element={<GroupTestEntry />} />
+        <Route path="/group-result" element={<GroupAnalysisResult />} />
         
         {/* 기존 라우트들은 새 라우트로 리다이렉트 */}
         <Route path="/question1" element={<Navigate to="/question/1" replace />} />
