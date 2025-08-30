@@ -11,6 +11,9 @@ function Question1() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const CURRENT_NO = 1; // TODO: wire with actual question index
+    const TOTAL_NO = 16;  // total question count
+
     // 🔹 API 호출
     useEffect(() => {
         const fetchData = async () => {
@@ -79,6 +82,24 @@ function Question1() {
                     flexDirection: 'column',
                 }}
             >
+                <div
+                    style={{
+                      position: 'absolute',
+                      top: 14,
+                      right: 14,
+                      backgroundColor: '#0f172a',
+                      color: '#ffffff',
+                      borderRadius: 9999,
+                      padding: '6px 12px',
+                      fontWeight: 800,
+                      fontSize: 14,
+                      letterSpacing: 0.5,
+                      boxShadow: '0 6px 16px rgba(0,0,0,0.18)'
+                    }}
+                    aria-label={`progress ${CURRENT_NO} of ${TOTAL_NO}`}
+                >
+                    {`${CURRENT_NO} / ${TOTAL_NO}`}
+                </div>
                 {/* ===== 카드 내부 헤더(가운데 정렬) ===== */}
                 <div
                     style={{
