@@ -1,5 +1,7 @@
+/// Home.jsx 수정본
+
 import axios from 'axios';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import globeImg from '../assets/images/여행_마크.png';
 
@@ -15,19 +17,6 @@ function Home() {
         []
     );
 
-    // 저장된 닉네임 로드
-    useEffect(() => {
-        const saved = localStorage.getItem('nickname');
-        if (saved) setNickname(saved);
-    }, []);
-
-    // 닉네임 변화 시 저장
-    useEffect(() => {
-        if (nickname.trim()) {
-            localStorage.setItem('nickname', nickname.trim());
-        }
-    }, [nickname]);
-
     // 제출
     const handleSubmit = async () => {
         if (nickname.trim() === '') {
@@ -41,7 +30,6 @@ function Home() {
             });
 
             if (response.data.success) {
-                localStorage.setItem('nickname', nickname.trim());
                 navigate('/question1');
             } else {
                 alert(response.data.message || '오류가 발생했습니다.');

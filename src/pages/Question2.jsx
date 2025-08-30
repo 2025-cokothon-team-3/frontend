@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import banner from '../assets/images/사진1.png';
+
 
 function Question2() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ function Question2() {
   useEffect(() => {
   const fetchData = async () => {
     try {
-      const questionId = 1;  // 이걸 바꿔가면서 2번, 3번 문제로 넘기면 됨
+      const questionId = 2;  
       const res = await fetch(`http://52.68.59.48:8081/api/questions/${questionId}`);
       const data = await res.json();
 
@@ -45,7 +45,7 @@ function Question2() {
       alert('선택지를 골라주세요!');
       return;
     }
-    navigate('/question2');
+    navigate('/question3');
   };
 
   return (
@@ -95,7 +95,7 @@ function Question2() {
           ←
         </div>
 
-        <div style={{ fontWeight: 900, fontSize: 28, marginBottom: 12 }}>Q1.</div>
+        <div style={{ fontWeight: 900, fontSize: 28, marginBottom: 12 }}>Q2.</div>
 
         {loading ? (
           <div style={{ fontWeight: 600, fontSize: 18 }}>불러오는 중...</div>
