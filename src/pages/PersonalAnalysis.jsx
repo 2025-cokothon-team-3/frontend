@@ -53,21 +53,33 @@ function PersonalAnalysis() {
         <h3>✈️ 당신의 여행 스타일</h3>
         <p>{result.description}</p>
 
-        {result.categories.map((cat) => (
-          <div key={cat.name} style={{ marginTop: '20px' }}>
-            <p style={{ marginBottom: '4px' }}>{cat.name} <b>{cat.label}</b> {cat.score}%</p>
-            <div style={{ background: '#eee', height: '12px', borderRadius: '8px' }}>
-              <div
-                style={{
-                  width: `${cat.score}%`,
-                  height: '100%',
-                  background: '#60a5fa',
-                  borderRadius: '8px',
-                }}
-              />
+        {Array.isArray(result.categories) ? (
+          result.categories.map((cat) => (
+            <div key={cat.name} style={{ marginTop: '20px' }}>
+              <p style={{ marginBottom: '4px' }}>{cat.name} <b>{cat.label}</b> {cat.score}%</p>
+              <div style={{ background: '#eee', height: '12px', borderRadius: '8px' }}>
+                <div
+                  style={{
+                    width: `${cat.score}%`,
+                    height: '100%',
+                    background: '#60a5fa',
+                    borderRadius: '8px',
+                  }}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p style={{ marginTop: '20px', color: 'gray' }}>카테고리 데이터가 없습니다.</p>
+        )}
+
+        
+
+
+
+
+
+
 
         <div style={{ marginTop: '30px' }}>
           <button onClick={handleRetest} style={buttonStyle}>retest</button>
