@@ -20,7 +20,7 @@ function Question1() {
             try {
                 const questionId = 1;
                 const res = await fetch(
-                    `http://52.68.59.48:8081/api/questions/${questionId}`
+                    `/api/questions/${questionId}`
                 );
                 const data = await res.json();
 
