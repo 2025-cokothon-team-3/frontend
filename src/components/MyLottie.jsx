@@ -1,16 +1,17 @@
-// components/MyLottie.jsx
+// components/Loading.jsx
 import React from "react";
-import Lottie from "lottie-react";
-import animationData from "../assets/loading.json"; // 다운로드한 JSON 파일
+//import MyLottie from "./MyLottie";
+import "../styles/Loading.css"; // 스타일은 question과 동일하게 복사
 
-const MyLottie = () => {
+const Loading = () => {
   return (
-    <Lottie
-      animationData={animationData}
-      loop={true}
-      style={{ width: 300, height: 300 }}
-    />
+    <div className="question-wrapper"> {/* question.jsx에서 쓰던 클래스 그대로 */}
+      <div className="loading-container">
+        <MyLottie />
+        <p className="loading-text">당신의 여행 성향을 분석하고 있어요...</p>
+      </div>
+    </div>
   );
 };
 
-export default MyLottie;
+export default Loading;
