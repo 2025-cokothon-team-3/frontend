@@ -52,6 +52,14 @@ export default {
     hot: true,
     port: 5173,
     open: true,
+    proxy: [
+      {
+        context: ['/api'],
+        target: 'http://52.68.59.48:8081',
+        changeOrigin: true,
+        secure: false,
+      }
+    ],
   },
   devtool: 'source-map',
 };
