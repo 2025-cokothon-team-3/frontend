@@ -44,6 +44,7 @@ function Question() {
         setSelected(null); // 새 질문 로드시 선택 초기화
     }, [currentQuestionNum]);
 
+    // 답변 제출 및 다음 질문으로 이동
     const handleNext = async () => {
         if (selected === null) {
             alert('선택지를 골라주세요!');
@@ -61,14 +62,14 @@ function Question() {
                 return;
             }
             
-            // 답변 저장 (userId 포함)
+            // 답변 저장
             const response = await fetch('/api/user-answers', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    userId: parseInt(userId),
+                    userId: parseInt(userId),  // userId 추가됨
                     questionId: questionData.id,
                     selectedChoice: selected + 1, // 1, 2, 3으로 변환
                 }),
@@ -77,8 +78,24 @@ function Question() {
             const result = await response.json();
 
             if (result.success) {
-                // 다음 질문으로 이동 또는 결과 페이지로
+                // 마지막 질문인 경우 테스트 결과 계산을 위해 일괄 제출
                 if (currentQuestionNum >= TOTAL_QUESTIONS) {
+                    try {
+                        // 테스트 결과 계산을 위해 제출
+                        const testResultResponse = await fetch(`/api/tests/submit/${userId}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            }
+                        });
+                        
+                        if (!testResultResponse.ok) {
+                            console.error('테스트 결과 계산 실패');
+                        }
+                    } catch (error) {
+                        console.error('테스트 결과 계산 중 오류:', error);
+                    }
+                    
                     navigate('/result');
                 } else {
                     navigate(`/question/${currentQuestionNum + 1}`);
