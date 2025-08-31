@@ -61,7 +61,7 @@ function PersonalAnalysis() {
           categories: [
             {
               name: '여행 계획',
-              score: ((planningScore - 4) / 8) * 100,
+              score: (planningScore / 12) * 100,
               label: planningType,
               totalScore: planningScore,
               maxScore: 12,
@@ -70,7 +70,7 @@ function PersonalAnalysis() {
             },
             {
               name: '여행 예산',
-              score: ((budgetScore - 4) / 8) * 100,
+              score: (budgetScore / 12) * 100,
               label: budgetType,
               totalScore: budgetScore,
               maxScore: 12,
@@ -79,7 +79,7 @@ function PersonalAnalysis() {
             },
             {
               name: '여행 활동',
-              score: ((activityScore - 4) / 8) * 100,
+              score: (activityScore / 12) * 100,
               label: activityType,
               totalScore: activityScore,
               maxScore: 12,
@@ -88,7 +88,7 @@ function PersonalAnalysis() {
             },
             {
               name: '사교 성향',
-              score: ((socialScore - 4) / 8) * 100,
+              score: (socialScore / 12) * 100,
               label: socialType,
               totalScore: socialScore,
               maxScore: 12,
@@ -258,22 +258,19 @@ function PersonalAnalysis() {
             }}>Share</button>
           </div>
 
-          <button
-            onClick={() => navigate('/group-test')}
-            style={{
-              marginTop: 20,
-              width: '100%',
-              padding: '14px',
-              borderRadius: 12,
-              fontWeight: 800,
-              fontSize: 14,
-              background: 'linear-gradient(135deg,#a78bfa,#818cf8)',
-              color: 'white',
-              border: 'none',
-              cursor: 'pointer',
-              boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
-            }}
-          >
+          <button style={{
+            marginTop: 20,
+            width: '100%',
+            padding: '14px',
+            borderRadius: 12,
+            fontWeight: 800,
+            fontSize: 14,
+            background: 'linear-gradient(135deg,#a78bfa,#818cf8)',
+            color: 'white',
+            border: 'none',
+            cursor: 'pointer',
+            boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+          }}>
             우리의 여행 밸런스 알아보기 -&gt;
           </button>
         </div>
