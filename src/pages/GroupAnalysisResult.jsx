@@ -279,15 +279,6 @@ function GroupAnalysisResult() {
                       </div>
                     )}
                   </div>
-                  {member.id && (
-                    <div style={{ 
-                      fontSize: 12, 
-                      color: '#6b7280',
-                      marginTop: 4 
-                    }}>
-                      ID: {member.id}
-                    </div>
-                  )}
                 </div>
               ))}
             </div>
