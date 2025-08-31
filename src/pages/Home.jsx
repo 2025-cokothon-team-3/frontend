@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import globeImg from '../assets/images/여행_마크.png';
+import globeImg from '../images/여행_마크.png';
 
 function Home() {
     // 상태
