@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function GroupTestEntry() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -8,6 +9,7 @@ function GroupTestEntry() {
   const [analyzing, setAnalyzing] = useState(false);
   const [error, setError] = useState('');
   const debounceRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (debounceRef.current) {
@@ -112,7 +114,7 @@ function GroupTestEntry() {
           analysisData: data.data,
           members: selectedMembers
         }));
-        window.location.href = '/group-result';
+        navigate('/group-result');
       } else {
         alert(data.message || '그룹 분석에 실패했습니다.');
       }
@@ -152,10 +154,10 @@ function GroupTestEntry() {
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          marginBottom: 20,
+          marginBottom: 24,
         }}>
           <div
-            onClick={() => alert('홈으로 이동')}
+            onClick={() => navigate(-1)}
             style={{
               fontSize: 20,
               fontWeight: 700,
@@ -172,7 +174,7 @@ function GroupTestEntry() {
             color: '#0f172a',
             margin: 0,
           }}>
-            그룹 여행 분석
+            그룹 여행 성향 분석
           </h1>
         </div>
 
