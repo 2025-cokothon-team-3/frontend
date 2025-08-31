@@ -1,7 +1,7 @@
 // src/pages/Cover.jsx
 import { useNavigate } from 'react-router-dom';
-// 표지 이미지 경로: src/images/cover.jpg (원하는 파일명으로 변경 가능)
-import coverImg from '../images/cover.jpg';
+// 표지 이미지 경로: src/images/cover.png (원하는 파일명으로 변경 가능)
+import coverImg from '../images/cover.png';
 
 function Cover() {
   const navigate = useNavigate();
