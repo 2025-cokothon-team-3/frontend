@@ -323,9 +323,6 @@ function GroupTestEntry() {
                     <div style={{ fontWeight: 600, color: '#1f2937' }}>
                       {member.nickname}
                     </div>
-                    <div style={{ fontSize: 12, color: '#6b7280' }}>
-                      ID: {member.id}
-                    </div>
                   </div>
                   <button
                     onClick={() => removeMember(member.id)}
