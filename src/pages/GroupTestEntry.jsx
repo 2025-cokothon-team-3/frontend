@@ -262,9 +262,6 @@ function GroupTestEntry() {
                   <div style={{ fontWeight: 600, color: '#1f2937' }}>
                     {user.nickname}
                   </div>
-                  <div style={{ fontSize: 12, color: '#6b7280' }}>
-                    ID: {user.id}
-                  </div>
                 </div>
                 <div style={{
                   fontSize: 14,

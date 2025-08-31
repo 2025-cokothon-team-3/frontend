@@ -57,7 +57,7 @@ function GroupAnalysisResult() {
       if (navigator.share) {
         await navigator.share({
           title: '그룹 여행 성향 분석 결과',
-          text: `우리 ${members.length}명 그룹의 여행 호환성은 ${analysisData.compatibilityScore}점이에요!`,
+          text: `우리 ${members.length}명 그룹의 케미 점수는 ${analysisData.compatibilityScore}점이에요!`,
           url: window.location.href
         });
       } else {
@@ -199,14 +199,14 @@ function GroupAnalysisResult() {
           </h1>
         </div>
 
-        {/* 호환성 점수 */}
+        {/* 케미 점수 */}
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <div style={{
             fontSize: 14,
             color: '#6b7280',
             marginBottom: 16
           }}>
-            {analysisData.memberCount}명의 여행 호환성 결과
+            {analysisData.memberCount}명의 여행 케미 점수
           </div>
           
           <div style={{ position: 'relative', display: 'inline-block' }}>
@@ -441,7 +441,7 @@ function GroupAnalysisResult() {
             lineHeight: 1.5,
             margin: 0
           }}>
-            호환성 점수가 낮아도 걱정하지 마세요! 서로 다른 성향이 오히려 더 풍부한 여행 경험을 만들어줄 수 있어요. 
+            케미 점수가 낮아도 걱정하지 마세요! 서로 다른 성향이 오히려 더 풍부한 여행 경험을 만들어줄 수 있어요. 
             중요한 것은 서로를 이해하고 배려하는 마음입니다.
           </p>
         </div>
