@@ -10,7 +10,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Cover />} />
+        <Route path="/home" element={<Home />} />
+        
         
         {/* 동적 질문 라우트 */}
         <Route path="/question/:questionNumber" element={<Question />} />
