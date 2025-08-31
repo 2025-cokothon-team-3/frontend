@@ -244,7 +244,7 @@ function PersonalAnalysis() {
               fontWeight: 700,
               fontSize: 14,
               cursor: 'pointer'
-            }}>retest</button>
+            }}>RETEST</button>
 
             <button style={{
               padding: '10px 20px',
@@ -255,7 +255,7 @@ function PersonalAnalysis() {
               fontWeight: 700,
               fontSize: 14,
               cursor: 'pointer'
-            }}>Share</button>
+            }}>SHARE</button>
           </div>
 
           <button

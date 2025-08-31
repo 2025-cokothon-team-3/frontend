@@ -148,7 +148,7 @@ function GroupAnalysisResult() {
               fontWeight: 600
             }}
           >
-            다시 분석하기
+            RETEST
           </button>
         </div>
       </div>
@@ -358,7 +358,7 @@ function GroupAnalysisResult() {
               transition: 'all 0.2s'
             }}
           >
-            결과 공유하기
+            SHARE
           </button>
           
           <button
@@ -376,7 +376,7 @@ function GroupAnalysisResult() {
               transition: 'all 0.2s'
             }}
           >
-            새로운 그룹 분석하기
+            RETEST
           </button>
 
           <button
@@ -393,7 +393,7 @@ function GroupAnalysisResult() {
               cursor: 'pointer'
             }}
           >
-            홈으로 돌아가기
+            HOME
           </button>
         </div>
 
