@@ -148,7 +148,7 @@ function GroupAnalysisResult() {
               fontWeight: 600
             }}
           >
-            다시 분석하기
+            RETRY
           </button>
         </div>
       </div>
@@ -248,24 +248,46 @@ function GroupAnalysisResult() {
             </h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {members.map((member, index) => (
-                <div key={member.id} style={{
+                <div key={member.id || index} style={{
                   backgroundColor: '#f8fafc',
                   borderRadius: 16,
                   padding: 16,
                   border: '1px solid #e2e8f0'
                 }}>
                   <div style={{
-                    fontSize: 16,
-                    fontWeight: 600,
-                    color: '#1f2937',
-                    marginBottom: 8
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
                   }}>
-                    {member.nickname}
+                    <div style={{
+                      fontSize: 16,
+                      fontWeight: 600,
+                      color: '#1f2937'
+                    }}>
+                      {member.nickname}
+                    </div>
+                    {member.type && (
+                      <div style={{
+                        backgroundColor: getTypeColor(member.type),
+                        color: '#ffffff',
+                        padding: '4px 12px',
+                        borderRadius: 12,
+                        fontSize: 12,
+                        fontWeight: 600
+                      }}>
+                        {member.type}
+                      </div>
+                    )}
                   </div>
-                  {/* 실제 데이터에서는 각 멤버의 성향 정보도 표시할 수 있습니다 */}
-                  <div style={{ fontSize: 12, color: '#6b7280' }}>
-                    ID: {member.id}
-                  </div>
+                  {member.id && (
+                    <div style={{ 
+                      fontSize: 12, 
+                      color: '#6b7280',
+                      marginTop: 4 
+                    }}>
+                      ID: {member.id}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -358,7 +380,7 @@ function GroupAnalysisResult() {
               transition: 'all 0.2s'
             }}
           >
-            결과 공유하기
+            SHARE
           </button>
           
           <button
@@ -376,7 +398,7 @@ function GroupAnalysisResult() {
               transition: 'all 0.2s'
             }}
           >
-            새로운 그룹 분석하기
+            RETRY
           </button>
 
           <button
@@ -393,7 +415,7 @@ function GroupAnalysisResult() {
               cursor: 'pointer'
             }}
           >
-            홈으로 돌아가기
+            HOME
           </button>
         </div>
 
